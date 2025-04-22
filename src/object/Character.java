@@ -1,9 +1,19 @@
+package object;
+import lombok.Getter;
+import lombok.Setter;
+import strategy.AttackStrategy;
+import strategy.NormalAttack;
+
+@Getter
+@Setter
 public class Character {
-	String name;
-	String race;
-	int hp;
-	int attack;
-	int defense;
+	public String name;
+	public String race;
+	public int hp;
+	private int attack;
+	private int defense;
+	private AttackStrategy attackStrategy;
+	
 	String[] itemNames = new String[10];
 	int[] itemAttack = new int[10];
 	int[] itemDefense = new int[10];
@@ -16,6 +26,7 @@ public class Character {
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
+		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
 	}
 
 	public void addItem(String name, int atk, int def, int heal) {
@@ -56,44 +67,8 @@ public class Character {
 		itemCount--;
 	}
 
-	public void attack(String enemyName, int enemyHp) {
-		System.out.println(name + "이(가) " + enemyName + "을(를) " + attack + "의 데미지로 공격했습니다.");
-		if (enemyHp - attack <= 0) {
-			System.out.println(enemyName + " 처치 완료!");
-		} else {
-			System.out.println(enemyName + "의 남은 HP: " + (enemyHp - attack));
-		}
+	public void attack(Character target) {
+		attackStrategy.attack(this, target);
 	}
 
-	public int getHp() {
-		return hp;
-	}
-
-	public int getAttack() {
-		return attack;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getItemCount() {
-		return itemCount;
-	}
-
-	public String getItemName(int index) {
-		return itemNames[index];
-	}
-
-	public int getItemAttack(int index) {
-		return itemAttack[index];
-	}
-
-	public int getItemDefense(int index) {
-		return itemDefense[index];
-	}
-
-	public int getItemHeal(int index) {
-		return itemHeal[index];
-	}
 }
