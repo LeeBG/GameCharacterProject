@@ -1,6 +1,4 @@
-package objectfactory;
-
-import object.Item;
+package org.game;
 
 public class ItemFactory {
 	public static Item createItem(String name, int value) {

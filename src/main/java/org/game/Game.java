@@ -1,8 +1,4 @@
-import battle.BattleSystem;
-import object.Character;
-import object.Item;
-import objectfactory.CharacterFactory;
-import objectfactory.ItemFactory;
+package org.game;
 
 public class Game {
     public static void main(String[] args) {

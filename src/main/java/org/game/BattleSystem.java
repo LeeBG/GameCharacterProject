@@ -1,6 +1,4 @@
-package battle;
-import object.Character;
-
+package org.game;
 
 public class BattleSystem {
     public void fight(Character character1, Character character2) {

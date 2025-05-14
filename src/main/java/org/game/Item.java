@@ -1,4 +1,4 @@
-package object;
+package org.game;
 
 public class Item {
 	private String name;

@@ -1,10 +1,8 @@
-package object;
+package org.game;
 
-import strategy.AttackStrategy;
-import strategy.MagicAttack;
-import strategy.NormalAttack;
 
 public class Character {
+	public static final int INVENTORY_SIZE = 10; // max inventory
 	public String name;
 	public String race;
 	public int hp;
@@ -51,9 +49,15 @@ public class Character {
 	}
 
 	// 아이템 추가
-	public void addItem(Item item) {
-		items[itemCount] = item;
-		itemCount++;
+	public boolean addItem(Item item) {
+		if(itemCount < INVENTORY_SIZE) {
+			items[itemCount] = item;
+			itemCount++;
+			return true;
+		}else {
+			System.out.println("인벤토리 가득 참");
+			return false;
+		}
 	}
 	
 	public void attack(String enemyName, int enemyHp) {
@@ -73,7 +77,7 @@ public class Character {
 		}
 	}
 
-	public void useItem(String itemName) {
+	public boolean useItem(String itemName) {
 		for (int i = 0; i < itemCount; i++) {
 			if (items[i].getName().equals(itemName)) {
 				attack += items[i].getAtk() ;
@@ -81,9 +85,10 @@ public class Character {
 				hp += items[i].getHeal();
 				System.out.println(items[i].getName() + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
 				removeItem(i);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	private void removeItem(int index) {

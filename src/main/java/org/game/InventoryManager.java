@@ -1,4 +1,4 @@
-import object.Character;
+package org.game;
 
 public class InventoryManager {
 	public void printItemDetails(Character c) {

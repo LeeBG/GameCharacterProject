@@ -1,7 +1,4 @@
-package objectfactory;
-
-import object.Character;
-import strategy.MagicAttack;
+package org.game;
 
 public class CharacterFactory {
 
