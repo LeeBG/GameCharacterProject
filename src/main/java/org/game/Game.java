@@ -2,7 +2,7 @@ package org.game;
 
 public class Game {
     public static void main(String[] args) {
-        Character hero = CharacterFactory.createCharacter("Artemis", "Elf", 100, 20, 30);
+        Character hero = CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
         InventoryManager manager = new InventoryManager();
         
         hero.addItem(ItemFactory.createItem("검", 10));

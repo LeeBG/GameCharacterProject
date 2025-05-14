@@ -152,5 +152,21 @@ public class Character {
 	public void setRace(String race) {
 		this.race = race;
 	}
+
+	public Item[] getItems() {
+		return items;
+	}
+
+	public void setItems(Item[] items) {
+		this.items = items;
+	}
+
+	public int getItemCount() {
+		return itemCount;
+	}
+
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
+	}
 	
 }

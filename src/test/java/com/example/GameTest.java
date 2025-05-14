@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class GameTest {
+	// 테스트코드 실습
 	@Test
 	void mainTest() {
 		assertEquals(3, 1+1);
