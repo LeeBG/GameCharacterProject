@@ -2,15 +2,14 @@ package org.game;
 
 
 public class Character {
-	public static final int INVENTORY_SIZE = 10; // max inventory
+	
 	public String name;
 	public String race;
 	public int hp;
 	private int attack;
 	private int defense;
 	private AttackStrategy attackStrategy;
-	private Item[] items = new Item[10];
-	int itemCount = 0;
+	private Inventory inventory;
 
 	// 게임 플레이 캐릭터(다형성)
 	public Character(String name, String race, int hp, int attack, int defense) {
@@ -19,6 +18,7 @@ public class Character {
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
+		this.inventory = new Inventory();
 		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
 	}
 	
@@ -28,6 +28,7 @@ public class Character {
 		this.race = race;
 		this.hp = hp;
 		this.attack = attack;
+		this.inventory = new Inventory();
 		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
 	}
 	
@@ -36,6 +37,7 @@ public class Character {
 		this.name = "몬스터";
 		this.race = race;
 		this.hp = hp;
+		this.inventory = new Inventory();
 		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
 	}
 	
@@ -45,21 +47,10 @@ public class Character {
 		this.hp = hp;
 		this.attack = attack;
 		this.defense = defense;
+		this.inventory = new Inventory();
 		this.attackStrategy = magicAttack; // 기본 전략 설정
 	}
 
-	// 아이템 추가
-	public boolean addItem(Item item) {
-		if(itemCount < INVENTORY_SIZE) {
-			items[itemCount] = item;
-			itemCount++;
-			return true;
-		}else {
-			System.out.println("인벤토리 가득 참");
-			return false;
-		}
-	}
-	
 	public void attack(String enemyName, int enemyHp) {
 		System.out.println(name + "이(가) " + enemyName + "을(를) " + attack + "의 데미지로 공격했습니다.");
 		if (enemyHp - attack <= 0) {
@@ -72,33 +63,23 @@ public class Character {
 	// InventoryManager
 	public void printInventory() {
 		System.out.println(name + "의 인벤토리:");
-		for (int i = 0; i < itemCount; i++) {
-			System.out.println("- " + items[i].getName() + " (공격력:" + items[i].getAtk() + ", 방어력:" + items[i].getDef() + ", 회복력:" +items[i].getHeal() + ")");
+		for (int i = 0; i < inventory.getItemCount(); i++) {
+			System.out.println("- " + inventory.getItems()[i].getName() + " (공격력:" + inventory.getItems()[i].getAtk() + ", 방어력:" + inventory.getItems()[i].getDef() + ", 회복력:" +inventory.getItems()[i].getHeal() + ")");
 		}
 	}
 
 	public boolean useItem(String itemName) {
-		for (int i = 0; i < itemCount; i++) {
-			if (items[i].getName().equals(itemName)) {
-				attack += items[i].getAtk() ;
-				defense += items[i].getDef();
-				hp += items[i].getHeal();
-				System.out.println(items[i].getName() + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
-				removeItem(i);
+		for (int i = 0; i < inventory.getItemCount(); i++) {
+			if (inventory.getItems()[i].getName().equals(itemName)) {
+				attack += inventory.getItems()[i].getAtk() ;
+				defense += inventory.getItems()[i].getDef();
+				hp += inventory.getItems()[i].getHeal();
+				System.out.println(inventory.getItems()[i].getName() + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
+				inventory.removeItem(this,i);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	private void removeItem(int index) {
-		for (int i = index; i < itemCount - 1; i++) {
-			items[i].setName(items[i+1].getName());
-			items[i].setAtk(items[i+1].getAtk());
-			items[i].setDef(items[i+1].getDef());
-			items[i].setHeal(items[i+1].getHeal());
-		}
-		itemCount--;
 	}
 
 	public int attack(Character target) {
@@ -153,20 +134,12 @@ public class Character {
 		this.race = race;
 	}
 
-	public Item[] getItems() {
-		return items;
+	public Inventory getInventory() {
+		return inventory;
 	}
 
-	public void setItems(Item[] items) {
-		this.items = items;
-	}
-
-	public int getItemCount() {
-		return itemCount;
-	}
-
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	
 }

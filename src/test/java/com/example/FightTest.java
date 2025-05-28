@@ -23,6 +23,7 @@ public class FightTest {
 	// 기본적으로 battle 사용할 사용자 세팅
 	@BeforeEach
 	public void setUpStreams() {
+		System.setOut(new PrintStream(outContent));
 		battle = new BattleSystem();
 		hero = CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
 		goblin= CharacterFactory.createCharacter("goblin", "Monster", 100, 100, 10); 
@@ -34,7 +35,7 @@ public class FightTest {
 	}
 
 	
-	// 배틀시스템에서의 
+	// 배틀시스템에서의 출력문 테스트
 	@Test
 	public void testBattleSystemFight() {
 		battle.fight(hero, goblin); 
@@ -46,5 +47,17 @@ public class FightTest {
 		assertEquals(expectedOutput, outContent.toString());
 	}
 	
+	
+	// 배틀시스템에서의 출력문 테스트 (반대)
+	@Test
+	public void testBattleSystemFightReverse() {
+		battle.fight(goblin,hero);
+		String expectedOutput = "전투 시작! Artemis VS 몬스터\r\n"
+				+ "Artemis이(가) 몬스터에게 마법 공격!\r\n"
+				+ "Artemis이(가) 몬스터을(를) 100의 데미지로 공격했습니다.\r\n"
+				+ "몬스터의 남은 HP: 0\r\n"
+				+ "몬스터 처치 완료!";
+		assertEquals(expectedOutput, outContent.toString());
+	}
 	
 }

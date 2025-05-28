@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import org.game.CharacterFactory;
+import org.game.Inventory;
 import org.game.Item;
 import org.game.ItemFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +21,7 @@ public class ItemTest {
 	private final PrintStream originalOut = System.out;
 
 	Character hero = null;
+	Inventory inventory = null;
 
 	// 기본적으로 아이템을 사용할 사용자 세팅
 	@BeforeEach
@@ -35,28 +37,33 @@ public class ItemTest {
 
 	@Test
 	public void testAddItem() {
-		for (int i = 0; i < Character.INVENTORY_SIZE; i++) {
-			assertTrue(hero.addItem(ItemFactory.createItem("검", 10)));
+		for (int i = 0; i < Inventory.INVENTORY_SIZE; i++) {
+			assertTrue(hero.getInventory().addItem(hero,ItemFactory.createItem("검", 10)));
 		}
+		// 초과에 대한 테스트
+		assertFalse(hero.getInventory().addItem(hero,ItemFactory.createItem("포션", 10)));
+		
+		// 갯수 테스트 추가
+		assertEquals(hero.getInventory().getItemCount(), 10);
 	}
 
 	@Test
 	void testAddItemInventoryFull() {
-		for (int i = 0; i < Character.INVENTORY_SIZE; i++) {
-			assertTrue(hero.addItem(new Item("검", 10, 0, 0)));
+		for (int i = 0; i < inventory.INVENTORY_SIZE; i++) {
+			assertTrue(hero.getInventory().addItem(hero,new Item("검", 10, 0, 0)));
 		}
-		assertFalse(hero.addItem(new Item("검", 10, 0, 0)));
+		assertFalse(hero.getInventory().addItem(hero,new Item("검", 10, 0, 0)));
 	}
 
 	@Test
 	public void testUseItem() {
-		hero.addItem(ItemFactory.createItem("검", 10));
-		hero.addItem(ItemFactory.createItem("방패", 10));
-		hero.addItem(ItemFactory.createItem("포션", 50));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("검", 10));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("방패", 10));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("포션", 50));
 
 		assertTrue(hero.useItem("검"));
 		assertFalse(hero.useItem("방패"));
-		assertEquals(hero.getItemCount(), 1);
+		assertEquals(hero.getInventory().getItemCount(), 1);
 	}
 
 	@Test
@@ -70,12 +77,12 @@ public class ItemTest {
 
 	@Test
 	public void testGetItemCount() {
-		hero.addItem(ItemFactory.createItem("검", 10));
-		hero.addItem(ItemFactory.createItem("방패", 10));
-		hero.addItem(ItemFactory.createItem("포션", 50));
-		hero.addItem(ItemFactory.createItem("포션", 50));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("검", 10));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("방패", 10));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("포션", 50));
+		hero.getInventory().addItem(hero,ItemFactory.createItem("포션", 10));
 
-		int count = hero.getItemCount();
+		int count = hero.getInventory().getItemCount();
 		assertEquals(4, count);
 	}
 
