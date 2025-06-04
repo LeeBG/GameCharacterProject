@@ -43,3 +43,7 @@ src/
 ---
 
 **개발 및 실습자용으로 작성된 프로젝트입니다. 자유롭게 수정하고 리팩토링하세요!**
+
+
+# Diagram 작성 진행중...
+![Image](https://github.com/user-attachments/assets/a632ece7-1eac-4835-b54a-16aa2d376982)
