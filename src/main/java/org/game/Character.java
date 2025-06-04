@@ -3,53 +3,13 @@ package org.game;
 
 public class Character {
 	
-	public String name;
-	public String race;
-	public int hp;
-	private int attack;
-	private int defense;
-	private AttackStrategy attackStrategy;
-	private Inventory inventory;
-
-	// 게임 플레이 캐릭터(다형성)
-	public Character(String name, String race, int hp, int attack, int defense) {
-		this.name = name;
-		this.race = race;
-		this.hp = hp;
-		this.attack = attack;
-		this.defense = defense;
-		this.inventory = new Inventory();
-		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
-	}
-	
-	// 때리는 몬스터(다형성)
-	public Character(String race, int hp, int attack) {
-		this.name = "몬스터";
-		this.race = race;
-		this.hp = hp;
-		this.attack = attack;
-		this.inventory = new Inventory();
-		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
-	}
-	
-	// 떄리지 못하는 몬스터(다형성)
-	public Character(String race, int hp) {
-		this.name = "몬스터";
-		this.race = race;
-		this.hp = hp;
-		this.inventory = new Inventory();
-		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
-	}
-	
-	public Character(String name, String race, int hp, int attack, int defense, MagicAttack magicAttack) {
-		this.name = name;
-		this.race = race;
-		this.hp = hp;
-		this.attack = attack;
-		this.defense = defense;
-		this.inventory = new Inventory();
-		this.attackStrategy = magicAttack; // 기본 전략 설정
-	}
+	protected String name;
+	protected String race;
+	protected int hp;
+	protected int attack;
+	protected int defense;
+	protected AttackStrategy attackStrategy;
+	protected Inventory inventory;
 
 	public void attack(String enemyName, int enemyHp) {
 		System.out.println(name + "이(가) " + enemyName + "을(를) " + attack + "의 데미지로 공격했습니다.");
