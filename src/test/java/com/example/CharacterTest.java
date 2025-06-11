@@ -9,7 +9,9 @@ import java.io.PrintStream;
 
 import org.game.Character;
 import org.game.CharacterFactory;
+import org.game.Elf;
 import org.game.ItemFactory;
+import org.game.Orc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,15 +20,15 @@ public class CharacterTest {
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 	
-	Character elf = null;
-	Character goblin  = null;
+	Elf elf = null;
+	Orc goblin  = null;
 	
 	// 기본적으로 사용자 세팅
 	@BeforeEach
 	public void setUpStreams() {
 		System.setOut(new PrintStream(outContent));
-		elf = CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
-		goblin= CharacterFactory.createCharacter("goblin", "Monster", 200, 100, 10);
+		elf = (Elf)CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
+		goblin= (Orc)CharacterFactory.createCharacter("goblin", "Monster", 200, 100, 10);
 		elf.getInventory().addItem(elf,ItemFactory.createItem("포션", 50));
 	}
 

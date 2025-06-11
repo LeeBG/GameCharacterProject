@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import org.game.BattleSystem;
 import org.game.Character;
 import org.game.CharacterFactory;
+import org.game.Elf;
+import org.game.Orc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,16 +19,16 @@ public class FightTest {
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
 
-	Character hero = null;
-	Character goblin  = null;
+	Elf hero = null;
+	Orc goblin  = null;
 	BattleSystem battle = null;
 	// 기본적으로 battle 사용할 사용자 세팅
 	@BeforeEach
 	public void setUpStreams() {
 		System.setOut(new PrintStream(outContent));
 		battle = new BattleSystem();
-		hero = CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
-		goblin= CharacterFactory.createCharacter("goblin", "Monster", 100, 100, 10); 
+		hero = (Elf)CharacterFactory.createCharacter("Artemis", "Elf", 100, 100, 30);
+		goblin= (Orc)CharacterFactory.createCharacter("goblin", "Monster", 100, 100, 10); 
 	}
 
 	@AfterEach

@@ -16,9 +16,4 @@ public class GameTest {
 	void mainTest() {
 		assertEquals(3, 1+1);
 	}
-	
-	@Test
-	void mainPrintTest() {
-		
-	}
 }
