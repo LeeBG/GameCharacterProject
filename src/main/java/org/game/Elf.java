@@ -2,7 +2,7 @@ package org.game;
 
 public class Elf extends Character {
 	// 게임 플레이 캐릭터(다형성)
-	public Elf(String name, String race, int hp, int attack, int defense) {
+	public Elf(String name, RACES race, int hp, int attack, int defense) {
 		this.name = name;
 		this.race = race;
 		this.hp = hp;
@@ -11,7 +11,7 @@ public class Elf extends Character {
 		this.attackStrategy = new NormalAttack(); // 기본 전략 설정
 	}
 	
-	public Elf(String name, String race, int hp, int attack, int defense, MagicAttack magicAttack) {
+	public Elf(String name, RACES race, int hp, int attack, int defense, MagicAttack magicAttack) {
 		this.name = name;
 		this.race = race;
 		this.hp = hp;

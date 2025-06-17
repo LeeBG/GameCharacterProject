@@ -2,7 +2,7 @@ package org.game;
 
 public class Orc extends Character {
 	// 때리는 몬스터(다형성)
-	public Orc(String race, int hp, int attack) {
+	public Orc(RACES race, int hp, int attack) {
 		this.name = "몬스터";
 		this.race = race;
 		this.hp = hp;
@@ -11,7 +11,7 @@ public class Orc extends Character {
 	}
 
 	// 게임 플레이 캐릭터(다형성)
-	public Orc(String name, String race, int hp, int attack, int defense) {
+	public Orc(String name, RACES race, int hp, int attack, int defense) {
 		this.name = name;
 		this.race = race;
 		this.hp = hp;

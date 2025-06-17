@@ -4,7 +4,7 @@ package org.game;
 public class Character {
 	
 	protected String name;
-	protected String race;
+	protected RACES race;
 	protected int hp;
 	protected int attack;
 	protected int defense;
@@ -86,11 +86,11 @@ public class Character {
 		this.name = name;
 	}
 
-	public String getRace() {
+	public RACES getRace() {
 		return race;
 	}
 
-	public void setRace(String race) {
+	public void setRace(RACES race) {
 		this.race = race;
 	}
 
